@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import Wrapper from "../Helpers/Wrapper";
 import Card from "../UI/Card";
 import CustomBtn from "../UI/CustomBtn";
 import CustomInput from "../UI/CustomInput";
@@ -7,6 +8,9 @@ import ErrorModel from "../UI/ErrorModel";
 
 import classes from "./AddUser.module.css";
 const AddUser = (props) => {
+  // const nameInputRef = useRef();
+  // const ageInputRef = useRef();
+
   const [entredUsername, setEntredUsername] = useState("");
   const [entredAge, setEntredAge] = useState("");
   const [error, setError] = useState();
@@ -17,6 +21,7 @@ const AddUser = (props) => {
     setEntredAge(e.target.value);
   };
   const addUserHandler = (e) => {
+    // console.log(nameInputRef);
     e.preventDefault();
     if (entredUsername.trim().length === 0 || entredAge.trim().length === 0) {
       setError({
@@ -41,9 +46,15 @@ const AddUser = (props) => {
     setError(null);
   };
   return (
-    <div>
-      {error && <ErrorModel title={error.title} msg={error.msg} onConfirm={errorHandler} />}
-      <Card className={classes.input}>
+    <Wrapper>
+      {error && (
+        <ErrorModel
+          title={error.title}
+          msg={error.msg}
+          onConfirm={errorHandler}
+        />
+      )}
+      <Card classname={classes.input}>
         <form onSubmit={addUserHandler}>
           <CustomLabel htmlFor="username" labelText="Username" />
           <CustomInput
@@ -51,6 +62,7 @@ const AddUser = (props) => {
             value={entredUsername}
             type="text"
             onChange={usernameChangeHandler}
+            // ref ={nameInputRef}
           />
           <CustomLabel htmlFor="age" labelText="age (Years)" />
           <CustomInput
@@ -58,11 +70,12 @@ const AddUser = (props) => {
             type="number"
             onChange={ageChangeHandler}
             value={entredAge}
+            // ref ={ageInputRef}
           />
           <CustomBtn type="submit">Add User</CustomBtn>
         </form>
       </Card>
-    </div>
+    </Wrapper>
   );
 };
 export default AddUser;

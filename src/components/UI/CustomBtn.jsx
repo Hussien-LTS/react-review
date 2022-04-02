@@ -7,7 +7,7 @@ const CustomBtn = (props) => {
     <button
       className={classes.button}
       type={props.type || "button"}
-      onHide={props.hide || null}
+      // onHide={props.hide || null}
       onClick={props.onClick}
     >
       {props.children}

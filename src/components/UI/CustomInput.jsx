@@ -7,6 +7,7 @@ const CustomInput = (props) => {
     <>
       <input
         value={props.value}
+        // ref ={props.ref}
         id={props.id}
         type={props.type}
         onChange={props.onChange}
